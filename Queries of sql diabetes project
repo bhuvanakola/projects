@@ -1,0 +1,70 @@
+/*previewing all the data*/
+SELECT * 
+FROM diabetes; #768 records
+
+
+/*No of women that are diabetic*/
+select count(outcome) from diabete where outcome=1;
+
+/*No of women that are Non-diabetic*/
+select count(outcome) from diabete where outcome=0;
+
+
+/*What is the highest number of times a woman got pregnant and the glucose level*/
+ select max(pregnancies),Glucose from diabete;
+
+
+/* alter table in order to update new column of result instead of outcome(int) to result(varchar)*/
+ alter table diabete add column result varchar(20);
+ update diabete set result = case 
+  when outcome=1 then "diabetic"
+ else "non-diabetic"
+ end;
+
+/*to ascertain the relationship between blood pressure  and diabetes*/
+ alter table diabete add column diastolic_blood_pressure varchar(25);
+ update diabete set diastolic_blood_pressure= CASE 
+	      WHEN  bloodpressure between 60 and 80 THEN 'normal'
+          WHEN bloodpressure BETWEEN 80 AND 89 THEN 'stage_1_hypertension'
+		  WHEN bloodpressure BETWEEN 90 AND 120 THEN 'stage_2_hypertension'
+		  WHEN bloodpressure >= 120 THEN 'hypertensive_crisis'
+          when bloodpressure <60 then "low hypertension"
+	END;
+
+select diastolic_blood_pressure, count(result) as total 
+from diabete where result="diabetic" group by diastolic_blood_pressure;
+
+/* number of time women get pregnant increase glucose level?*/
+alter table diabete add column preg varchar(20);
+update diabete set preg=case
+when pregnancies between 0 and 5 then "1-5"
+when pregnancies between 5 and 9 then "5-9"
+when pregnancies >=10 then "above 10 "
+end;
+
+select preg, avg(glucose) from diabete group by preg;
+
+/*to ascertain the relationship between the body mass index and diabetes*/
+alter table diabete add  column bodymassindex varchar(20);
+update diabete set bodymassindex=case 
+when bmi < 25 then "under weight"
+when bmi between 25 and 30 then "normal"
+when bmi >30 then "over weight"
+end ;
+
+select count(result), bodymassindex from diabete where result="diabetic" group by bodymassindex;
+
+/*to ascertain the relationship between age_range and diabetes*/
+alter table diabete add column age_cat varchar(20);
+ update diabete set age_cat=case 
+ when age <30 then "young"
+ when age between 30 and 50 then "adult"
+ when age >50 then "old"
+ end;
+ 
+ select age_cat, count(result) from diabete where result="diabetic" group by age_cat;
+
+
+
+
+   
