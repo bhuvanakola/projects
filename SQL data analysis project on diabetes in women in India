@@ -1,0 +1,22 @@
+Project Name: Data analysis using SQL on diabetes in women in India
+
+Tools and technologies used:
+SQL workbench
+Ms excel
+
+project Description: Description of this project is  the analysis is carried through questions based on the diabetic data of women in india. 
+
+To ascertain the total number of diabetic and non-diabetic women.
+
+What is the relationship between blood pressure and diabetes?
+
+Does the number of times a woman gets pregnant affect her glucose level?
+
+What is the correlation between body mass index and diabetes?
+
+Does child bearing increase the risk of being diabetic?
+
+What is the highest number of times a woman got pregnant and her glucose level?
+
+Data Analysis:
+Analysis was carried out by sql queries regarding to the question and we can see the answers and output for the questions in below link.
